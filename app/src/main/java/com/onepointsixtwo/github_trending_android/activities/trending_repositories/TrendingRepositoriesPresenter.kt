@@ -41,6 +41,10 @@ class TrendingRepositoriesPresenter @Inject constructor() {
     // Public Interface
 
     fun loadRepositories() {
+        if (repositories.isNotEmpty()) {
+            return
+        }
+
         isLoading.set(true)
         isInErrorState.set(false)
 
