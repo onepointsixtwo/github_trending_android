@@ -69,6 +69,9 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
+    // Picasso (async image loading)
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
     //RxJava for Tests
     testImplementation 'io.reactivex.rxjava2:rxjava:2.1.10'
 
