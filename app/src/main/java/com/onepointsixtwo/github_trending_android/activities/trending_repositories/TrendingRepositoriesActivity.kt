@@ -13,6 +13,7 @@ import javax.inject.Inject
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.SearchView
 import android.view.inputmethod.InputMethodManager
+import com.onepointsixtwo.github_trending_android.activities.repository.RepositoryActivity
 
 
 class TrendingRepositoriesActivity : AppCompatActivity(), TrendingRepositoriesPresenterView,
@@ -73,7 +74,7 @@ class TrendingRepositoriesActivity : AppCompatActivity(), TrendingRepositoriesPr
     // PRESENTER VIEW IMPLEMENTATION
 
     override fun openRepository(repository: GitHubRepository) {
-        //TODO: open the repository activity
+        startActivity(RepositoryActivity.createIntent(this, repository))
     }
 
     override fun updateRepositoriesList(repositories: List<TrendingRepository>) {
