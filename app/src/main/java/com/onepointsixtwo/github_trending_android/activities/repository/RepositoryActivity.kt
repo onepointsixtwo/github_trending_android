@@ -19,6 +19,8 @@ class RepositoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         presenter.setGitHubRepository(getRepositoryFromInstance(this))
 
         this.title = presenter.title.get()
@@ -36,6 +38,11 @@ class RepositoryActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         presenter.cancelLoading()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     companion object {
