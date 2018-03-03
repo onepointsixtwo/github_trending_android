@@ -42,6 +42,7 @@ class TrendingRepositoriesRowHolder(val binding: RowTrendingRepositoryBinding,
     : RecyclerView.ViewHolder(binding.root) {
 
     var index: Int = 0
+    var animator: ValueAnimator? = null
 
     init {
         binding.root.setOnClickListener {
@@ -54,11 +55,15 @@ class TrendingRepositoriesRowHolder(val binding: RowTrendingRepositoryBinding,
             animator.addUpdateListener {
                 binding.root.setBackgroundColor(it.animatedValue as Int)
             }
+            this.animator = animator
             animator.start()
         }
     }
 
     fun bind(repository: TrendingRepository, index: Int) {
+        animator?.cancel()
+        binding.root.setBackgroundColor(binding.root.context.resources.getColor(R.color.white))
+
         binding.repository = repository
         binding.executePendingBindings()
         this.index = index
