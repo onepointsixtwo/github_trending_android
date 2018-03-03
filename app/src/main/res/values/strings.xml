@@ -3,4 +3,5 @@
     <string name="repositories_loading_text">Loading Repositories&#8230;</string>
     <string name="repositories_failed_loading_text">Failed to load repositories!</string>
     <string name="retry">Retry</string>
+    <string name="readme_title">Readme.md</string>
 </resources>

@@ -9,13 +9,137 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#00FF00">
+        android:background="@color/paleGrey">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/paleGrey">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="20dp"
+                android:layout_alignBottom="@+id/forks_and_stars"
+                android:background="@color/white"/>
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avatar_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="45dp"
+                app:imageURL="@{ presenter.imageURL }" />
+            
+            <TextView
+                android:id="@+id/user_name_text_view"
+                android:layout_below="@+id/avatar_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/reddishOrange"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text='@{ presenter.userName, default="{UserName}" }'/>
+
+            <View
+                android:id="@+id/line_view"
+                android:layout_below="@id/user_name_text_view"
+                android:layout_width="25dp"
+                android:layout_height="1dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:background="@color/mediumGrey"/>
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_below="@+id/line_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:textColor="@color/mediumGrey"
+                android:text='@{ presenter.description, default="{Description}" }'/>
+
+            <LinearLayout
+                android:id="@+id/forks_and_stars"
+                android:layout_below="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="35dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
+                android:background="@drawable/white_background_corner_radius">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text='@{ presenter.starsCount, default="56 Stars" }' />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/mediumGrey"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text='@{ presenter.forksCount, default="3 Forks" }' />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/readme_title"
+                android:layout_below="@+id/forks_and_stars"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:text="@string/readme_title"/>
+
+            <TextView
+                android:id="@+id/readme_text"
+                android:layout_below="@+id/readme_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                app:markdown='@{ presenter.readmeContentMarkdown }'/>
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/readme_title"
+                android:layout_marginTop="15dp"
+                android:layout_centerInParent="true"
+                android:indeterminate="true"
+                app:visible="@{ presenter.loadingReadme }"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/readme_title"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="15dp"
+                android:text="@string/retry"
+                app:visible="@{ presenter.errorLoadingReadme }"
+                android:onClick="@{ () -> presenter.retry() }"/>
 
         </RelativeLayout>
 

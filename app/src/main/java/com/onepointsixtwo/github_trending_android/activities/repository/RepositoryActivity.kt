@@ -14,12 +14,28 @@ import javax.inject.Inject
 class RepositoryActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var repositoryPresenter: RepositoryPresenter
+    lateinit var presenter: RepositoryPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        presenter.setGitHubRepository(getRepositoryFromInstance(this))
+
+        this.title = presenter.title.get()
+
         val binding = DataBindingUtil.setContentView<ActivityRepositoryBinding>(this, R.layout.activity_repository)
+        binding.presenter = presenter
+        binding.executePendingBindings()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.loadReadme()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        presenter.cancelLoading()
     }
 
     companion object {
