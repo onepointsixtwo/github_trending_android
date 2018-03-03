@@ -1,5 +1,7 @@
 package com.onepointsixtwo.github_trending_android.helpers
 
+import com.onepointsixtwo.github_trending_android.activities.repository.RepositoryPresenter
+import com.onepointsixtwo.github_trending_android.activities.repository.RepositoryPresenterTests
 import com.onepointsixtwo.github_trending_android.activities.trending_repositories.TrendingRepositoriesPresenterTests
 import com.onepointsixtwo.github_trending_android.retrofit.GitHubApi
 import com.onepointsixtwo.github_trending_android.retrofit.GitHubService
@@ -36,4 +38,5 @@ class TestModule {
 @Component(modules = arrayOf(TestModule::class))
 interface TestComponent {
     fun inject(test: TrendingRepositoriesPresenterTests)
+    fun inject(test: RepositoryPresenterTests)
 }
