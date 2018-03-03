@@ -72,6 +72,9 @@ dependencies {
     // Picasso (async image loading)
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
+    // MarkdownJ (markdown processor)
+    implementation 'org.markdownj:markdownj-core:0.4'
+
     //RxJava for Tests
     testImplementation 'io.reactivex.rxjava2:rxjava:2.1.10'
 
