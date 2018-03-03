@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="repository"
+            type="com.onepointsixtwo.github_trending_android.activities.trending_repositories.TrendingRepository" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:text='@{ repository.projectName, default="{Project Name}" }'/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textStyle="normal"
+            android:textSize="16sp"
+            android:textColor="@color/mediumGrey"
+            android:text='@{ repository.starsCount, default="{Project stars count}" }'/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textStyle="normal"
+            android:textSize="16sp"
+            android:textColor="@color/mediumGrey"
+            android:text='@{ repository.description, default="{Project description}" }'/>
+
+    </LinearLayout>
+
+</layout>

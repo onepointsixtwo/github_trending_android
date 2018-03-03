@@ -2,13 +2,17 @@ package com.onepointsixtwo.github_trending_android.dagger
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.onepointsixtwo.github_trending_android.BuildConfig
 import com.onepointsixtwo.github_trending_android.retrofit.CustomConverterFactory
 import com.onepointsixtwo.github_trending_android.retrofit.GitHubApi
 import com.onepointsixtwo.github_trending_android.retrofit.GitHubService
 import dagger.Module
 import dagger.Provides
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -36,10 +40,16 @@ class AppModule() {
                 .readTimeout(30, TimeUnit.SECONDS)
                 .connectTimeout(30, TimeUnit.SECONDS)
 
+        if (BuildConfig.DEBUG) {
+            val logging = HttpLoggingInterceptor()
+            logging.level = HttpLoggingInterceptor.Level.BODY
+            builder.addInterceptor(logging)
+        }
+
         val client = builder.build()
 
         val converterFactory = CustomConverterFactory(ScalarsConverterFactory.create(),
-                GsonConverterFactory.create())
+                GsonConverterFactory.create(gson))
 
         return Retrofit.Builder()
                 .baseUrl("https://api.github.com")
@@ -52,5 +62,10 @@ class AppModule() {
     @Provides
     fun provideGson(): Gson {
         return GsonBuilder().create()
+    }
+
+    @Provides
+    fun provideScheduler(): Scheduler {
+        return AndroidSchedulers.mainThread()
     }
 }
